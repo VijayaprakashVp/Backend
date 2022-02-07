@@ -8,7 +8,12 @@ const userScheme = new mongoose.Schema(
     email: { type: String, required: true },
     address: { type: String, required: true },
     age: { type: Number, required: true },
-    gender: { type: String, required: false , default: "Male" },
+    gender: { type: String, required: false , default: "FeMale" },
+    master_id : {
+      type: mongoose.Schema.Types.ObjectId,
+      ref : "masters",
+      required : true
+    }
   },
   {
     versionKey: false,
