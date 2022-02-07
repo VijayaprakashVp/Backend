@@ -23,7 +23,17 @@ router.get("", async (req, res) => {
   }
 });
 
-router.patch("", async (req, res) => {
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).lean().exec();
+
+    return res.status(200).send(user);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+});
+
+router.patch("/:id", async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -37,7 +47,7 @@ router.patch("", async (req, res) => {
   }
 });
 
-router.delete("", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id).lean().exec();
 
